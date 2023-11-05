@@ -1,6 +1,5 @@
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.5.2/firebase-app.js";
 import { getFirestore,collection,updateDoc,setDoc,doc } from "https://www.gstatic.com/firebasejs/10.5.2/firebase-firestore.js";
-import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.5.2/firebase-auth.js";
 
 const firebaseConfig = {
   apiKey: "AIzaSyAEfuVGKF63-CI-CTgiYxMkah1glxl-dPg",
@@ -15,15 +14,6 @@ const firebaseConfig = {
 export const app = initializeApp(firebaseConfig);
 export const database = getFirestore(app);
 console.log("Firebase has been initialized");
-
-const auth = getAuth(app);
-onAuthStateChanged(auth, (user) => {
-    if (user) {
-      console.log("User is signed in.");
-    } else {
-      console.log("User is signed out.");
-    }
-  });
 
 if (database)
 {
