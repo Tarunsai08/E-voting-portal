@@ -54,7 +54,6 @@ document.addEventListener("DOMContentLoaded", function () {
       logintext.style.display = "block";
       loadingSpinner.style.display = "none";
     } else {
-      console.log("hello");
       registerUser();
     }
   });
@@ -120,7 +119,6 @@ const registerUser = async () => {
   const registerError = document.getElementById("registerError");
   const loadingSpinner = document.getElementById("loader");
   const logintext = document.getElementById("register-button");
-  console.log("1");
   const myCollection = collection(database, "myCollection");
   const dataToAdd = {
     Name: name,
@@ -182,13 +180,9 @@ const uploadFileToStorage = (file, storagePath) => {
     const storage = firebase.Storage();
     const storageRef = storage.ref(storagePath);
     try {
-      console.log("hello1");
       const snapshot = await storageRef.put(file);
-      console.log("hello2");
       const downloadURL = await snapshot.ref.getDownloadURL();
-      console.log("hello4");
       resolve(downloadURL);
-      console.log("hello5");
     } catch (error) {
       reject(error);
     }
