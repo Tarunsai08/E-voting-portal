@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Registration - E-Voting System</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <link
+      href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.16/dist/tailwind.min.css"
+      rel="stylesheet"
+    />
+    <style>
+      #loader {
+        width: 26px;
+        height: 26px;
+        border: 5px solid #fff;
+        border-radius: 50%;
+        display: inline-block;
+        box-sizing: border-box;
+        position: relative;
+        animation: pulse 1s linear infinite;
+      }
+      #loader:after {
+        content: "";
+        position: absolute;
+        width: 26px;
+        height: 26px;
+        border: 5px solid #fff;
+        border-radius: 50%;
+        display: inline-block;
+        box-sizing: border-box;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, -50%);
+        animation: scaleUp 1s linear infinite;
+      }
+
+      @keyframes scaleUp {
+        0% {
+          transform: translate(-50%, -50%) scale(0);
+        }
+        60%,
+        100% {
+          transform: translate(-50%, -50%) scale(1);
+        }
+      }
+      @keyframes pulse {
+        0%,
+        60%,
+        100% {
+          transform: scale(1);
+        }
+        80% {
+          transform: scale(1.2);
+        }
+      }
+      .content {
+        display: none;
+      }
+    </style>
+    <script type="module" src="../js/register.js"></script>
+  </head>
+  <body class="content bg-gray-200 my-7">
+    <div class="min-h-screen flex items-center justify-center">
+      <form
+        class="bg-white p-8 shadow-md rounded-lg w-96"
+        enctype="multipart/form-data"
+      >
+        <h2 class="text-2xl font-semibold mb-4">
+          Register for E-Voting System
+        </h2>
+        <div class="mb-4">
+          <label for="name" class="block text-sm font-medium text-gray-700"
+            >Full Name:</label
+          >
+          <input
+            type="text"
+            id="name"
+            name="name"
+            required
+            placeholder="Enter your name"
+            class="w-full p-2 border rounded"
+          />
+          <p id="nameError" class="text-red-600"></p>
+        </div>
+        <div class="mb-4">
+          <label
+            for="phone_number"
+            class="block text-sm font-medium text-gray-700"
+            >Phone Number:</label
+          >
+          <input
+            type="tel"
+            id="phone_number"
+            name="phone_number"
+            required
+            placeholder="123-456-7890"
+            class="w-full p-2 border rounded"
+          />
+          <p id="phoneError" class="text-red-600"></p>
+        </div>
+        <div class="mb-4">
+          <label for="dob" class="block text-sm font-medium text-gray-700"
+            >Date of Birth:</label
+          >
+          <input
+            type="date"
+            id="dob"
+            name="dob"
+            required
+            class="w-full p-2 border rounded"
+          />
+        </div>
+        <div class="mb-4">
+          <label for="gender" class="block text-sm font-medium text-gray-700"
+            >Gender:</label
+          >
+          <select
+            id="gender"
+            name="gender"
+            required
+            class="w-full p-2 border rounded"
+          >
+            <option value="" disabled selected>Select your Gender</option>
+            <option value="male">Male</option>
+            <option value="female">Female</option>
+            <option value="other">Other</option>
+          </select>
+        </div>
+        <div class="mb-4">
+          <label for="aadhar_no" class="block text-sm font-medium text-gray-700"
+            >Aadhar Number:</label
+          >
+          <input
+            type="text"
+            id="aadhar_no"
+            name="aadhar_no"
+            required
+            placeholder="1234 5678 9012"
+            class="w-full p-2 border rounded"
+          />
+          <p id="aadharError" class="text-red-600"></p>
+        </div>
+        <div class="mb-4">
+          <label
+            for="current_region"
+            class="block text-sm font-medium text-gray-700"
+            >Current Region:</label
+          >
+          <select
+            id="current_region"
+            name="current_region"
+            required
+            class="w-full p-2 border rounded"
+          >
+            <option value="" disabled selected>Select your region</option>
+            <option value="Anakapalle">Anakapalle</option>
+            <option value="Bapatla">Bapatla</option>
+            <option value="Eluru">Eluru</option>
+            <option value="Gajuwaka">Gajuwaka</option>
+            <option value="Guntur">Guntur</option>
+            <option value="Nellore">Nellore</option>
+            <option value="Srikakulam">Srikakulam</option>
+            <option value="Vizianagaram">Vizianagaram</option>
+            <option value="Visakhapatnam">Visakhapatnam</option>
+            <option value="other">Other</option>
+          </select>
+        </div>
+        <div class="mb-4">
+          <label for="photo" class="block text-sm font-medium text-gray-700"
+            >Upload Photo:</label
+          >
+          <input
+            type="file"
+            id="photo"
+            name="photo"
+            accept="image/*"
+            required
+            class="w-full p-2 border rounded"
+          />
+        </div>
+        <div class="mb-4">
+          <label for="signature" class="block text-sm font-medium text-gray-700"
+            >Upload Signature:</label
+          >
+          <input
+            type="file"
+            id="signature"
+            name="signature"
+            accept="image/*"
+            required
+            class="w-full p-2 border rounded"
+          />
+        </div>
+        <p class="text-red-600" id="registerError"></p>
+        <button
+          type="submit"
+          class="w-full bg-blue-500 text-white p-2 rounded hover:bg-blue-600"
+        >
+          <p id="register-button">Register</p>
+          <div class="w-full flex justify-center items-center">
+            <span id="loader"></span>
+          </div>
+        </button>
+        <p class="text-center mt-4">
+          Existing user?
+          <a
+            href="login.html"
+            class="text-blue-600 hover:text-blue-800 underline decoration-wavy decoration-blue-300 hover:decoration-blue-500 font-semibold transition duration-300 ease-in-out"
+            >Login Now</a
+          >
+        </p>
+      </form>
+    </div>
+  </body>
+  <script>
+    document.addEventListener("DOMContentLoaded", async function () {
+      $(window).on("load", function () {
+        $(".content").fadeIn(1500);
+      });
+    });
+  </script>
+</html>

@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>E-Voting System</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.16/dist/tailwind.min.css"
+      rel="stylesheet"
+    />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <style>
+      #loader {
+        display: none;
+        width: 26px;
+        height: 26px;
+        border-radius: 50%;
+        border-top: 3px solid #fff;
+        border-right: 3px solid transparent;
+        box-sizing: border-box;
+        animation: rotation 1s linear infinite;
+      }
+
+      @keyframes rotation {
+        0% {
+          transform: rotate(0deg);
+        }
+        100% {
+          transform: rotate(360deg);
+        }
+      }
+      .content{
+        display: none;
+      }
+    </style>
+  </head>
+  <body class="content hidden bg-gray-200">
+
+    <header class="p-6 bg-white flex justify-between items-center shadow-md">
+      <h1 class="text-xl font-semibold">
+        Hello, <span id="user-name">User Name</span>
+      </h1>
+      <img
+        id="profile-photo"
+        src="/path/to/profile/photo.jpg"
+        alt=""
+        class="h-10 w-10 rounded-full"
+      />
+    </header>
+
+    <main class="p-6">
+      <div class="slideshow-container">
+        <div class="mySlides fade">
+          <div class="relative w-full h-screen overflow-hidden flex items-center justify-center">
+            <img class="absolute inset-0 w-full h-full object-cover" src="https://upload.wikimedia.org/wikipedia/commons/3/34/Jana_Sena_Party_Flag.png" alt="Jana_Sena_Party_Flag" />
+            <div class="absolute inset-0 bg-black bg-opacity-60"></div>
+            <div class="relative z-10">
+              <div class="w-40 h-40 bg-white rounded-full flex items-center justify-center group cursor-pointer transition duration-500 ease-in-out transform hover:scale-105">
+                <p class="text-xl font-bold text-gray-800 group-hover:text-red-600 group-hover:animate-bounce">JanaSena</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="mySlides fade">
+          <div class="relative w-full h-screen overflow-hidden flex items-center justify-center">
+            <img class="absolute inset-0 w-full h-full object-cover" src="https://vote4cycle.com/static/img/cycle.0f6d514.png" alt="TDP_Party_Flag" />
+            <div class="absolute inset-0 bg-black bg-opacity-60"></div>
+            <div class="relative z-10">
+              <div class="w-40 h-40 bg-white rounded-full flex items-center justify-center group cursor-pointer transition duration-500 ease-in-out transform hover:scale-105">
+                <p class="text-xl font-bold text-gray-800 group-hover:text-yellow-400 group-hover:animate-bounce">TDP</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="mySlides fade">
+          <div class="relative w-full h-screen overflow-hidden flex items-center justify-center">
+            <img class="absolute inset-0 w-full h-full object-cover" src="https://www.greatandhra.com/newphotos10/YSRCP-fan11675451066.jpg" alt="YSRCP_Party_Flag" />
+            <div class="absolute inset-0 bg-black bg-opacity-60"></div>
+            <div class="relative z-10">
+              <div class="w-40 h-40 bg-white rounded-full flex items-center justify-center group cursor-pointer transition duration-500 ease-in-out transform hover:scale-105">
+                <p class="text-xl font-bold text-gray-800 group-hover:text-green-600 group-hover:animate-bounce">YSRCP</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div id="vote-popup" class="popup fixed inset-0 flex items-center justify-center bg-black bg-opacity-80 z-50 hidden">
+        <div class="popup-content bg-white p-8  rounded-lg shadow-lg">
+          <label for="vote-janasena">
+          <h2 class="text-2xl font-semibold text-center mb-4">Cast your Vote</h2>
+          <div class="party m-4 flex items-center bg-red-100 p-4 rounded-lg hover:bg-blue-200 cursor-pointer transition duration-300">
+            <img src="https://m.media-amazon.com/images/I/71d+YNmI5CL.jpg" alt="JanaSena Party" class="w-16 h-16 rounded-full mr-4">
+            <div class="flex-grow">
+              <h3 class="text-lg font-semibold text-blue-500">JanaSena Party</h3>
+              <label for="vote-janasena" class="text-gray-600">Vote for JanaSena Party</label>
+            </div>
+            <input type="radio" id="vote-janasena" name="party" class="ml-4"/>
+          </div>
+        </label>
+          <label for="vote-tdp">
+          <div class="party m-4 flex items-center bg-yellow-100 p-4 rounded-lg hover:bg-yellow-200 cursor-pointer transition duration-300">
+            <img src="https://m.media-amazon.com/images/I/71VRd3FvgRL.jpg" alt="TDP Party" class="w-16 h-16 rounded-full mr-4" />
+            <div class="flex-grow">
+              <h3 class="text-lg font-semibold text-yellow-500">Telugu Desam Party (TDP)</h3>
+              <label for="vote-tdp" class="text-gray-600">Vote for Telugu Desam Party (TDP)</label>
+            </div>
+            <input type="radio" name="party" id="vote-tdp" class="ml-4" />
+          </div>
+        </label>
+          <label for="vote-ysrcp">
+          <div class="party m-4 flex items-center bg-green-100 p-4 rounded-lg hover:bg-green-200 cursor-pointer transition duration-300">
+            <img src="https://www.ysrcongress.com/sites/default/files/article_images/2020/03/13/YSRCP%20Logo-1.jpg" alt="YSRCP Party" class="w-16 h-16 rounded-full mr-4" />
+            <div class="flex-grow">
+              <h3 class="text-lg font-semibold text-green-500">YSR Congress Party (YSRCP)</h3>
+              <label for="vote-ysrcp" class="text-gray-600">Vote for YSR Congress Party (YSRCP)</label>
+            </div>
+            <input type="radio" name="party" id="vote-ysrcp" class="ml-4" />
+          </div>
+        </label>
+          <div>
+            <p class="text-red-600 mt-4" id="select-Error"></p>
+          </div>
+          <div class="flex justify-center mt-4">
+            <button id="vote-button" class="bg-blue-500 text-white p-2 rounded hover:bg-blue-600"><p>Vote</p>
+            <span id="loader"></span></button>
+            <button id="close-popup" class="bg-red-500 text-white p-2 rounded hover-bg-red-600 ml-4">Close</button>
+          </div>
+        </div>
+      </div>
+      
+      <div class="w-full flex items-center justify-center mt-6">
+        <button id="vote-now-button" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Vote Now</button>
+      </div>
+        
+    </main>
+    <footer class="bg-gray-900 text-white py-8">
+      <div class="container mx-auto px-4">
+          <div class="flex flex-wrap justify-between items-center">
+              <div class="w-full md:w-1/3 lg:w-1/4 mb-6 md:mb-0">
+                  <h4 class="text-2xl font-bold mb-4">E-Voting Portal</h4>
+                  <p class="mb-4">Your trusted source for online voting and elections.</p>
+                  <p>&copy; 2023 E-Voting Portal</p>
+              </div>
+              <div class="w-full md:w-1/3 lg:w-1/4 mb-6 md:mb-0">
+                  <h4 class="text-2xl font-bold mb-4">Quick Links</h4>
+                  <ul>
+                      <li><a href="../index.html" class="text-blue-400 hover:underline">Home</a></li>
+                      <li><a href="./voting-page.html" class="text-blue-400 hover:underline">Voting Page</a></li>
+                      <li><a href="./results.html" class="text-blue-400 hover:underline">Results</a></li>
+                  </ul>
+              </div>
+              <div class="w-full md:w-1/3 lg:w-1/4">
+                  <h4 class="text-2xl font-bold mb-4">Follow Us</h4>
+                  <ul>
+                      <li><a href="www.linkedin.com/in/tarunsai08" class="text-blue-400 hover:underline">LinkedIn</a></li>
+                      <li><a href="https://www.instagram.com/tarun_sai08/" class="text-blue-400 hover:underline">Instagram</a></li>
+                  </ul>
+              </div>
+          </div>
+      </div>
+  </footer>
+  <script>
+    document.addEventListener("DOMContentLoaded", async function () {
+      $(window).on("load", function () {
+        $(".content").fadeIn(1500);
+      });
+    });
+  </script>
+    <script type="module" src="../js/voting-page.js"></script>
+  </body>
+</html>
