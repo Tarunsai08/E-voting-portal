@@ -65,7 +65,7 @@ document.addEventListener("DOMContentLoaded", function () {
               });
               votePopup.style.display = "none";
               document.body.style.overflow = "auto";
-              console.log("Document successfully updated!");
+              console.log("Voting successfully updated!");
             } catch (error) {
               console.error("Error updating document: ", error);
             }
@@ -113,7 +113,6 @@ async function loadPartyMLA(){
     let regionExists = false;
     await querySnapshot.forEach((doc) => {
       const userData = doc.data();
-      console.log(userData.Region, user.Region);
       if (userData.Region === user.Region) {
         const JanaSena = document.getElementById("JanaSena");
         const TDP = document.getElementById("TDP");
@@ -132,7 +131,7 @@ async function loadPartyMLA(){
     });
 
     if (regionExists) {
-      console.log("exists");
+      console.log("region exists");
     } else {
       console.log("region not found");
       Error.innerText = "No such region exists";
@@ -158,7 +157,6 @@ function disableradiobuttons(){
         voteButton.style.display = "none";
         selectError.innerText = "You have already voted";
       }
-      console.log("Voting successful");
     } else {
       console.log("Document does not exist for userID:", userID);
     }
