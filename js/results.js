@@ -43,10 +43,9 @@ document.addEventListener("DOMContentLoaded", async () => {
     overallWinner.votes
   );
 
-  // Append the overall winner element to the center-aligned container
   overallWinnerContainer.appendChild(overallWinnerElement);
 
-  // Now, loop through the regions and add them below the overall winner.
+  
   for (const region in regions) {
     const regionElement = createRegionElement(region, regions[region]);
     resultsContainer.appendChild(regionElement);
