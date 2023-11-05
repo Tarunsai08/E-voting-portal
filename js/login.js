@@ -22,8 +22,6 @@ document.addEventListener("DOMContentLoaded", async function () {
         let userExists = false;
         querySnapshot.forEach((doc) => {
           const userData = doc.data();
-          console.log(userData.Aadhar_number, userData.Phone_number);
-          console.log(aadharInput.value, phoneInput.value);
           if (
             userData.Aadhar_number === aadharInput.value &&
             userData.Phone_number === phoneInput.value
