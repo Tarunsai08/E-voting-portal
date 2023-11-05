@@ -25,12 +25,10 @@ document.addEventListener("DOMContentLoaded", function () {
   voteButton.addEventListener("click", async function () {
     let hasSelected = false;
     const radioButtons = document.querySelectorAll(`input[name="party"]:checked`);
-    console.log(radioButtons);
     if (radioButtons.length === 0) {
       selectError.innerText = "Please vote for someone";
     } else {
       try {
-        console.log(userID);
         votePopup.style.display = "none";
         const docRef1 = doc(database,"myCollection",userID);
         try{
@@ -105,8 +103,6 @@ const user = JSON.parse(userDataJson);
 const userID = JSON.parse(localStorage.getItem("UserID"));
 
 if (user) {
-  console.log(user.Name);
-  console.log(user.Phone_number);
   document.getElementById("user-name").innerText = user.Name;
 } else {
   console.log("User data not found in localStorage");
@@ -154,12 +150,9 @@ function disableradiobuttons(){
   .then((doc) => {
     if (doc.exists()) {
       const userData = doc.data();
-      console.log("User Data:", userData);
       if (userData.hasVoted){
         const radioButtons = document.querySelectorAll(`input[type="radio"][name="party"]`);
-        console.log(radioButtons);
         radioButtons.forEach((radioButton) => {
-          console.log(radioButton);
           radioButton.disabled = true;
         });
         voteButton.style.display = "none";
